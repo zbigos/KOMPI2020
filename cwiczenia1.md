@@ -38,7 +38,30 @@ objaśnienie:
 
 ***
 ### Zadanie 3
+niech D = 0,1,2,3,4,5,6,7,8,9
+```mermaid
+graph TD;
+    digit[e]-->|0-9|digits;
+    digits-->|0-9|digits[B];
+    digits-->|.0-9|opt_frac;
+    opt_frac-->|0-9|opt_frac;
 
+    digits-->|E|E;
+    opt_frac-->|E|E;
+    
+    E-->|+|opt_exp;
+    E-->|-|opt_exp;
+    E-->|0-9|exp_n;
+
+    opt_exp-->|0-9|exp_n;
+    exp_n-->|0-9|exp_n;
+    
+    
+style digits fill:#00a000
+style opt_frac fill:#00a000
+style exp_n fill:#00a000
+
+```
 ***
 ### Zadanie 4
 Weźmy automat deterministyczny mający N stanów. Podczas konsumowania jakiegoś ciągu w danym momencie znajdujemy się w wyłącznie jednym z N stanów. Z zasady szufladkowej wiemy ży po skonsumowaniu N+1 razy ciągu `/*` (który jest dla nas istotny, i to go chcemy zliczać), w conajmniej jednym stanie znajdziemy się conajmniej dwa razy. Oznacza to, że nasz automat nie rozpozna od siebie stanu w którym ma N+1 i `<jakaś inna, mniejsza liczba>` zagłębień komentarza. 
@@ -51,37 +74,36 @@ Automat (0+1)*0(0+1) definiuje język sładający się z [skończonych ciągów 
 
 ```mermaid
 graph LR;
-    A-->|0|A;
+    A-->|0/1|A;
     A-->|0|B;
     B-->|0|C;
     B-->|1|C;
 style C fill:#00a000
 ```
 
-zdeterminizuj polaka
 ```mermaid
 graph LR;
-    eps-->|1|p1;
-    eps-->|0|succ0;
-    succ0[0]-->|0|succ00;
-    succ00[00000...0]-->|0|succ00;
-    succ00-->|1|a[acc];
-    
-    p1-->|1|p1;
+    A-->|1|A;
+    A-->|0|A+B;
+    A+B-->|1|A+C;
+    A+B-->|0|A+B+C;
+    A+C-->|1|A;
+    A+C-->|0|A+B;
+    A+B+C-->|1|A+C;
+    A+B+C-->|0|A+B+C;
 
-    p1-->|0|bp;
-    bp-->|0|acc;
-    bp-->|1|acc;
-    
+style A+C fill:#00a000
+style A+B+C fill:#00a000
 
-style acc fill:#00a000
-style succ00 fill:#00a000
-style a fill:#00a000
 ```
-
 
 ***
 ### Zadanie 6
+000 | 0 | 0
+000 | 0 | 1
+111 | 0 | 0
+111 | 0 | 1
+
 
 ***
 ### Zadanie 7
@@ -100,6 +122,7 @@ A zje wszystkie ciągi 0 i 1 z prefiksu,
 A->B zjada to wymuszone zero  
 Następnie N-1 stanów zjada ciąg 0 bądź 1 długości N-1.  
 Łącznie N+1 stanów
+
 
 ***
 ### Zadanie 8
