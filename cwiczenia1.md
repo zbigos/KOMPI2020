@@ -126,3 +126,42 @@ Następnie N-1 stanów zjada ciąg 0 bądź 1 długości N-1.
 
 ***
 ### Zadanie 8
+
+DFA
+```mermaid
+graph LR;
+    e-->|E|E;
+    E-->|N|N;
+    E-->|L|L;
+    L-->|S|S;
+    S-->|E|acc;
+    
+    N-->|D|D;
+    D-->|I|I;
+    I-->|F|acc;
+    e-->|I|I;
+
+style acc fill:#00a000
+```
+
+NFA
+```mermaid
+graph LR;
+    e-->|E|E;
+    E-->|L|L;
+    L-->|S|S;
+    S-->|E|ELSE;
+
+    e-->|I|I;
+    I-->|F|IF;
+
+    e-->|E|E2[E];
+    E2-->|N|N;
+    N-->|D|D;
+    D-->|I|I2[I];
+    I2[I]-->|F|ENDIF;
+style IF fill:#00a000
+style ELSE fill:#00a000
+style ENDIF fill:#00a000
+
+```
