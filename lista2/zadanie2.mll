@@ -1,21 +1,23 @@
-{ 
+{
   open Printf
 }
 
+
 rule automat = parse
-  | "B" { printf "AUTOMAT AKCEPTUJE <B>\n" 
+  | "A""B"*"A"eof { printf "AUTOMAT AKCEPTUJE AB*A\n"
   }
-  | "A"	{ printf "AUTOMAT AKCEPTUJE <A>\n" 
+  | "ABA"+eof { printf "AUTOMAT AKCEPTUJE ABA+\n"
   }
-  | eof { raise End_of_file 
+  | "B"eof { printf "AUTOMAT AKCEPTUJE <B>\n" 
   }
+  | "A"eof	{ printf "AUTOMAT AKCEPTUJE <A>\n" 
+  }
+
 
 {
   let main () =
     let lexbuf = Lexing.from_channel stdin in
-    while true do
-      automat lexbuf
-    done
+    automat lexbuf
 
   let _ = Printexc.print main ()
 }
