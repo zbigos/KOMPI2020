@@ -6,13 +6,19 @@ Automat skończony do rozponznania ciągów reprezentujących komentarze. Czyli 
 graph LR;
     A[ε]-->|/|/;
     /-->|*|C((/*));
-    C((/*))-->|cokolwiek poza *|C((/*));
+    C((/*))-->|^*|C((/*));
     
     /-->|/|D[\/\/];
-    D[\/\/]-->|cokolwiek poza \n|D((/));
+    D[\/\/]-->|^\n|D((/));
 
     D[ // ]-->|\n|E[OK];
     C[*/ <rzeczy> ]-->|*|F[*];
+    
+    F[*/ <rzeczy> ]-->|*|F;
+
+    F[*/ <rzeczy> ]-->|^*|C;
+
+
     F[*/ <rzeczy> *]-->|/|E[OK];
 
 style E fill:#00a000
