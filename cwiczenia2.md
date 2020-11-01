@@ -144,7 +144,9 @@ oraz
 $$ S \rightarrow S(S) | \varepsilon $$
 generują te same języki. 
 Żeby pokazać że L1 == L2 pokażemy że L1 zawiera się w L2 i L2 zawiera się w L1.
-* **L1 w L2** Tutaj jest prosto. Widzimy że:
+* **L1 w L2** Tutaj jest prosto.  
+
+Widzimy że:
 L1:   
 $$ S \rightarrow \varepsilon $$   
 ma odpowiednik w L2: 
@@ -160,6 +162,8 @@ _powiemy że nawiasowanie ma długość k, jeśli występuje w nim k * '(' oraz 
 Zakładamy (na mocy indukcji mocnej) że dla każdego nawiasowania długości k-1 wygenerowanego przez L1, mamy odpowiednik produkcji w L2.
 Weźmy teraz jakieś nawiasowanie z L2 długości k. Nawiasowanie to będzie skonkatenowanym wyrażeniem `(n)` gdzie n to jakieś (różne) nawiasowania długości mniejszej niż k. Wiemy że umiemy je wyprowadzić w L2 z założeń indukcyjnych. Czyli widzimy że jeśli L2 będzie umiał wyprodukować `(S)(S)(S)...(S)` (tyle nawiasów ile dane nawiasowanie z L1 posiada) to produkcje S->n są już pokazane. No i widać że tak się da (tldr cały czas rozwijamy s bez nawiasu i na koniec ubijamy je epsilonem)
 
+L2 jest jednoznaczna, bo każde nawiasowanie generuje nam graf produkcji. Na wzór tego co było w dowodzie indukcyjnym
+
 ***
 ### Zadanie 4
 $$ S \rightarrow (S) | [S] | SS | \varepsilon $$
@@ -172,6 +176,10 @@ $$ S \rightarrow S' | SS' | \varepsilon $$
 $$ S' \rightarrow (S) | [S] $$
 ***
 ### Zadanie 5
+E -> E+E' | E-E' | E'
+E' -> E' * E'' | E''
+E'' -> E''' ^ E'' | E'''
+E''' -> id | (E)
 ***
 ### Zadanie 6
 ***
