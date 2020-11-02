@@ -1,0 +1,180 @@
+State 0:
+main' -> . main [ # ]
+-- On MINUS shift to state 1
+-- On LPAREN shift to state 2
+-- On INT shift to state 3
+-- On main shift to state 16
+-- On expr shift to state 17
+
+State 1:
+expr -> MINUS . expr UMINUS [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On MINUS shift to state 1
+-- On LPAREN shift to state 2
+-- On INT shift to state 3
+-- On expr shift to state 14
+
+State 2:
+expr -> LPAREN . expr RPAREN [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On MINUS shift to state 1
+-- On LPAREN shift to state 2
+-- On INT shift to state 3
+-- On expr shift to state 4
+
+State 3:
+expr -> INT . [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On UMINUS reduce production expr -> INT 
+-- On TIMES reduce production expr -> INT 
+-- On RPAREN reduce production expr -> INT 
+-- On PLUS reduce production expr -> INT 
+-- On MINUS reduce production expr -> INT 
+-- On EOL reduce production expr -> INT 
+-- On DIV reduce production expr -> INT 
+
+State 4:
+expr -> LPAREN expr . RPAREN [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . PLUS expr [ TIMES RPAREN PLUS MINUS DIV ]
+expr -> expr . MINUS expr [ TIMES RPAREN PLUS MINUS DIV ]
+expr -> expr . TIMES expr [ TIMES RPAREN PLUS MINUS DIV ]
+expr -> expr . DIV expr [ TIMES RPAREN PLUS MINUS DIV ]
+-- On TIMES shift to state 5
+-- On RPAREN shift to state 7
+-- On PLUS shift to state 8
+-- On MINUS shift to state 12
+-- On DIV shift to state 10
+
+State 5:
+expr -> expr TIMES . expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On MINUS shift to state 1
+-- On LPAREN shift to state 2
+-- On INT shift to state 3
+-- On expr shift to state 6
+
+State 6:
+expr -> expr . PLUS expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . MINUS expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . TIMES expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr TIMES expr . [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . DIV expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On UMINUS reduce production expr -> expr TIMES expr 
+-- On TIMES reduce production expr -> expr TIMES expr 
+-- On RPAREN reduce production expr -> expr TIMES expr 
+-- On PLUS reduce production expr -> expr TIMES expr 
+-- On MINUS reduce production expr -> expr TIMES expr 
+-- On EOL reduce production expr -> expr TIMES expr 
+-- On DIV reduce production expr -> expr TIMES expr 
+
+State 7:
+expr -> LPAREN expr RPAREN . [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On UMINUS reduce production expr -> LPAREN expr RPAREN 
+-- On TIMES reduce production expr -> LPAREN expr RPAREN 
+-- On RPAREN reduce production expr -> LPAREN expr RPAREN 
+-- On PLUS reduce production expr -> LPAREN expr RPAREN 
+-- On MINUS reduce production expr -> LPAREN expr RPAREN 
+-- On EOL reduce production expr -> LPAREN expr RPAREN 
+-- On DIV reduce production expr -> LPAREN expr RPAREN 
+
+State 8:
+expr -> expr PLUS . expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On MINUS shift to state 1
+-- On LPAREN shift to state 2
+-- On INT shift to state 3
+-- On expr shift to state 9
+
+State 9:
+expr -> expr . PLUS expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr PLUS expr . [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . MINUS expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . TIMES expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . DIV expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On TIMES shift to state 5
+-- On DIV shift to state 10
+-- On UMINUS reduce production expr -> expr PLUS expr 
+-- On RPAREN reduce production expr -> expr PLUS expr 
+-- On PLUS reduce production expr -> expr PLUS expr 
+-- On MINUS reduce production expr -> expr PLUS expr 
+-- On EOL reduce production expr -> expr PLUS expr 
+
+State 10:
+expr -> expr DIV . expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On MINUS shift to state 1
+-- On LPAREN shift to state 2
+-- On INT shift to state 3
+-- On expr shift to state 11
+
+State 11:
+expr -> expr . PLUS expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . MINUS expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . TIMES expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . DIV expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr DIV expr . [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On UMINUS reduce production expr -> expr DIV expr 
+-- On TIMES reduce production expr -> expr DIV expr 
+-- On RPAREN reduce production expr -> expr DIV expr 
+-- On PLUS reduce production expr -> expr DIV expr 
+-- On MINUS reduce production expr -> expr DIV expr 
+-- On EOL reduce production expr -> expr DIV expr 
+-- On DIV reduce production expr -> expr DIV expr 
+
+State 12:
+expr -> expr MINUS . expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On MINUS shift to state 1
+-- On LPAREN shift to state 2
+-- On INT shift to state 3
+-- On expr shift to state 13
+
+State 13:
+expr -> expr . PLUS expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . MINUS expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr MINUS expr . [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . TIMES expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+expr -> expr . DIV expr [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On TIMES shift to state 5
+-- On DIV shift to state 10
+-- On UMINUS reduce production expr -> expr MINUS expr 
+-- On RPAREN reduce production expr -> expr MINUS expr 
+-- On PLUS reduce production expr -> expr MINUS expr 
+-- On MINUS reduce production expr -> expr MINUS expr 
+-- On EOL reduce production expr -> expr MINUS expr 
+
+State 14:
+expr -> expr . PLUS expr [ UMINUS TIMES PLUS MINUS DIV ]
+expr -> expr . MINUS expr [ UMINUS TIMES PLUS MINUS DIV ]
+expr -> expr . TIMES expr [ UMINUS TIMES PLUS MINUS DIV ]
+expr -> expr . DIV expr [ UMINUS TIMES PLUS MINUS DIV ]
+expr -> MINUS expr . UMINUS [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On UMINUS shift to state 15
+-- On TIMES shift to state 5
+-- On PLUS shift to state 8
+-- On MINUS shift to state 12
+-- On DIV shift to state 10
+
+State 15:
+expr -> MINUS expr UMINUS . [ UMINUS TIMES RPAREN PLUS MINUS EOL DIV ]
+-- On UMINUS reduce production expr -> MINUS expr UMINUS 
+-- On TIMES reduce production expr -> MINUS expr UMINUS 
+-- On RPAREN reduce production expr -> MINUS expr UMINUS 
+-- On PLUS reduce production expr -> MINUS expr UMINUS 
+-- On MINUS reduce production expr -> MINUS expr UMINUS 
+-- On EOL reduce production expr -> MINUS expr UMINUS 
+-- On DIV reduce production expr -> MINUS expr UMINUS 
+
+State 16:
+main' -> main . [ # ]
+-- On # accept main
+
+State 17:
+expr -> expr . PLUS expr [ TIMES PLUS MINUS EOL DIV ]
+expr -> expr . MINUS expr [ TIMES PLUS MINUS EOL DIV ]
+expr -> expr . TIMES expr [ TIMES PLUS MINUS EOL DIV ]
+expr -> expr . DIV expr [ TIMES PLUS MINUS EOL DIV ]
+main -> expr . EOL [ # ]
+-- On TIMES shift to state 5
+-- On PLUS shift to state 8
+-- On MINUS shift to state 12
+-- On EOL shift to state 18
+-- On DIV shift to state 10
+
+State 18:
+main -> expr EOL . [ # ]
+-- On # reduce production main -> expr EOL 
+
